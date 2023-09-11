@@ -6,6 +6,9 @@ typedef struct nave{
 	char classe[50];
 	char recursosParaVidas[10];
 	char numeroPassageiros[10];
+
+	
+
 }Nave; 
 
 #endif
