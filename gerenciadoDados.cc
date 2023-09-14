@@ -1,22 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+using namespace std;
 
 #include "typesProject.h"
 
 Nave* listaNave(const std::string& nomeNave) {
-    std::string path = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves/Rocinante/" + nomeNave + ".txt";
-    std::cout << path << std::endl;
+    string path = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves/Rocinante/" + nomeNave + ".txt";
+    //cout << path << endl;
 
-    std::ifstream arquivo(path);
+    ifstream arquivo(path);
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo." << std::endl;
+        cerr << "Erro ao abrir o arquivo." << endl;
         return nullptr;
     }
 
     Nave* newNave = new Nave;
 
-    std::string linha;
+    string linha;
     int campo = 0;
     while (std::getline(arquivo, linha, ';')) {
         switch (campo) {
@@ -35,10 +36,10 @@ Nave* listaNave(const std::string& nomeNave) {
 int main() {
     Nave* nave = listaNave("Rocinante");
     if (nave) {
-        std::cout << "Nome: " << nave->nome << std::endl;
-        std::cout << "Classe: " << nave->classe << std::endl;
-        std::cout << "Recursos de Suporte à Vida: " << nave->recursosSuporteVidas << std::endl;
-        std::cout << "Número de Passageiros: " << nave->numeroPassageiros << std::endl;
+        cout << "Nome: " << nave->nome << endl;
+        cout << "Classe: " << nave->classe << endl;
+        cout << "Recursos de Suporte a Vida: " << nave->recursosSuporteVidas << endl;
+        cout << "Numero de Passageiros: " << nave->numeroPassageiros << endl;
         delete nave; // Lembre-se de liberar a memória alocada.
     }
     return 0;

@@ -1,17 +1,18 @@
 #ifndef TYPESPROJECT_H
 #define TYPESPROJECT_H
+using namespace std;
 
 typedef struct nave{ 
     int prioridade;
-	std::string nome;
-    std::string classe;
-    std::string recursosSuporteVidas;
-    std::string numeroPassageiros;
+	string nome;
+    string classe;
+    string recursosSuporteVidas;
+    string numeroPassageiros;
 
     // sobrescrevendo as seguinte operação 
     bool operator == (nave p) const {return prioridade == p.prioridade;}
-    bool operator <= (nave p) const {return prioridade <= p.prioridade;}
-    bool operator >= (nave p) const {return prioridade >= p.prioridade;}
+    bool operator < (nave p) const {return prioridade < p.prioridade;}
+    bool operator > (nave p) const {return prioridade > p.prioridade;}
 }Nave; 
 
 typedef struct passgeiro{
