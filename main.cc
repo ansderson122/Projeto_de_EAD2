@@ -1,19 +1,14 @@
-#include <stdio.h>
-#include <string.h>
-#include "typesProject.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+#include "gerenciadoDados.h"
 
 
 int main(void) {
+    string path = "C:/Users//ansde/Documents/Projeto_de_EAD2/dados/naves.txt";
 	Passageiro pessoa1;
-    strcpy(pessoa1.nome, "Ruan");
-    strcpy(pessoa1.planeta_de_origem, "Terra");
-	pessoa1.idade = 27;
-	
-
-
-    printf("Nome: %s\n", pessoa1.nome);
-    printf("Planeta de Origem: %s\n", pessoa1.planeta_de_origem);
-    printf("Idade: %d\n", pessoa1.idade);
+    
     
     return 0;
 }
