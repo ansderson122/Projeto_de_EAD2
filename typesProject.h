@@ -16,15 +16,15 @@ typedef struct nave{
 }Nave; 
 
 typedef struct passgeiro{
-    char nome[50];
-    char planeta_de_origem[50];
-    int idade;
-    char identificador[30];
+    string nome;
+    string planeta_de_origem;
+    unsigned int idade;
+    string identificador;
 }Passageiro;
 
 typedef struct  recursor {
-    char nomeRecursor[50];
-    int quantideda;
+    string nomeRecursor;
+    unsigned int quantideda;
     // 0 para não contem recusor de suporte a vida, e 1 contem 
     int suporteVida; 
 }Recursor;

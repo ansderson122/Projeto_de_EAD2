@@ -5,8 +5,29 @@ using namespace std;
 
 #include "typesProject.h"
 
-Nave* listaNave(const std::string& nomeNave) {
-    string path = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves/Rocinante/" + nomeNave + ".txt";
+class gerenciadoDados
+{
+private:
+    /* data */
+public:
+    gerenciadoDados(/* args */);
+    ~gerenciadoDados();
+    Nave* carregaNave(std::string nomeNave);
+    bool adicionarDados(string path, Nave* dados); 
+};
+
+gerenciadoDados::gerenciadoDados(/* args */)
+{
+}
+
+gerenciadoDados::~gerenciadoDados()
+{
+}
+
+
+Nave* gerenciadoDados::carregaNave(std::string nomeNave) {
+    string path = "C:/Users//ansde/Documents/Projeto_de_EAD2/dados/naves/" +  nomeNave + "/"+ nomeNave + ".txt";
+ 
     //cout << path << endl;
 
     ifstream arquivo(path);
@@ -33,13 +54,39 @@ Nave* listaNave(const std::string& nomeNave) {
     return newNave;
 }
 
+
+bool gerenciadoDados::adicionarDados(string path ,Nave* dados){
+
+     // Abrir o arquivo para escrita e leitura no final
+    ofstream arquivo(path, ios::app | ios::in);
+
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo." << endl;
+        return false;
+    }
+    // Posicionar o ponteiro no final do arquivo
+    arquivo.seekp(0, ios::end);
+
+    arquivo <<  dados->nome + ";" + dados->classe + ";" + dados->recursosSuporteVidas + ";" + dados->numeroPassageiros + ";0" <<  endl ;
+
+    arquivo.close(); 
+    return true;
+}
+
+
+
 int main() {
-    Nave* nave = listaNave("Rocinante");
+    gerenciadoDados g;
+    Nave* nave = g.carregaNave("Rocinante");
     if (nave) {
         cout << "Nome: " << nave->nome << endl;
         cout << "Classe: " << nave->classe << endl;
         cout << "Recursos de Suporte a Vida: " << nave->recursosSuporteVidas << endl;
         cout << "Numero de Passageiros: " << nave->numeroPassageiros << endl;
+      
+
+        string path = "C:/Users//ansde/Documents/Projeto_de_EAD2/dados/naves.txt";
+        g.adicionarDados(path,nave);
         delete nave; // Lembre-se de liberar a memória alocada.
     }
     return 0;
