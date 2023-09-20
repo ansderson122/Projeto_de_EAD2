@@ -15,7 +15,7 @@ typedef struct nave{
     bool operator > (nave p) const {return prioridade > p.prioridade;}
 }Nave; 
 
-typedef struct passgeiro{
+typedef struct passageiro{
     string nome;
     string planeta_de_origem;
     unsigned int idade;
