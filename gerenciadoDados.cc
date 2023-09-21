@@ -72,8 +72,10 @@ bool gerenciadoDados::criaArquivo(string path,string nome){
 
     if(arquivo.is_open()){
         arquivo << endl;
+        arquivo.close();
         return true;
     }
+    arquivo.close();
     return false;
 }
 
@@ -99,27 +101,11 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     // Posicionar o ponteiro no final do arquivo
     arquivo.seekp(0, ios::end);
 
-    arquivo <<  dados->nome + ";" + dados->classe + ";" + dados->recursosSuporteVidas + ";" + dados->numeroPassageiros + ";0" <<  endl ;
+    // salvando dados 
+    arquivo <<  dados->nome + ";" + dados->classe + ";" + dados->recursosSuporteVidas + ";" + dados->numeroPassageiros + ";" + to_string(dados->nivelDeDoenca) + ";0" <<  endl ;
     
     return true;
 }
 
 
-int main(void) {
-    Nave nave;
-    gerenciadoDados gb;
 
-    cout << "adicionar nave" << endl;
-    cout << "nome da nave: ";
-    cin >> nave.nome;
-    cout << "Classe da nave: ";
-    cin >> nave.classe;
-    cout << "recurso de suporte a vida: ";
-    cin >> nave.recursosSuporteVidas;
-    nave.numeroPassageiros = "0";
-    gb.adicionarNave(&nave);
-
-    
-    
-    return 0;
-}

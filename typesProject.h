@@ -8,6 +8,7 @@ typedef struct nave{
     string classe;
     string recursosSuporteVidas;
     string numeroPassageiros;
+    int nivelDeDoenca;
 
     // sobrescrevendo as seguinte operação 
     bool operator == (nave p) const {return prioridade == p.prioridade;}
