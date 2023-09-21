@@ -39,7 +39,8 @@ void cadastraNave(gerenciadoDados gb){
 
 int main(void) {
     gerenciadoDados gb;
-    cadastraNave(gb);
+    //cadastraNave(gb);
+    gb.editarPrioridade("Rocinante",6);
     
     
     return 0;

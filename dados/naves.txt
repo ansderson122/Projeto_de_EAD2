@@ -1,1 +1,1 @@
-Rocinante;Cruzador;sim;6;0;0
+Rocinante;Cruzador;sim;6;0;6

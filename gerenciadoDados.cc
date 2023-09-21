@@ -108,8 +108,47 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     return true;
 }
 
-bool gerenciadoDados::editarPrioridade(string nome, int prioridade){
+bool gerenciadoDados::editarPrioridade(string nome, int prioridade) {
+    ifstream arquivoLeitura(this->pathPrincipal);
+    ofstream arquivoTemp("temp.txt"); // Arquivo temporário para armazenar as edições
+    string linha;
 
+    if (!arquivoLeitura.is_open() || !arquivoTemp.is_open()) {
+        return false;
+    }
+
+    while (getline(arquivoLeitura, linha)) {
+        stringstream ss(linha);
+        string campus;
+        getline(ss, campus, ';');
+
+        if (campus == nome) {
+            int i = 0;
+            string linhaEditada;
+
+            while (i <= 4) {
+                linhaEditada += campus + ";";
+                getline(ss, campus, ';');
+                i++;
+            }
+
+            linhaEditada += to_string(prioridade);
+            arquivoTemp << linhaEditada << endl; // Escreve a linha editada no arquivo temporário
+        } else {
+            arquivoTemp << linha << endl; // Mantém as outras linhas inalteradas
+        }
+    }
+
+    arquivoLeitura.close();
+    arquivoTemp.close();
+
+    // Substitui o arquivo original pelo arquivo temporário
+    if (remove(this->pathPrincipal.c_str()) != 0) {
+        return false;
+    }
+    if (rename("temp.txt", this->pathPrincipal.c_str()) != 0) {
+        return false;
+    }
+
+    return true;
 }
-
-
