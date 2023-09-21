@@ -8,13 +8,16 @@ using namespace std;
 class gerenciadoDados
 {
 private:
+    string pathPrincipal;
+    string pathSegundaria;
     bool criarDiretorio(string path);
     bool criaArquivo(string path,string nome);
 public:
     gerenciadoDados(/* args */);
     ~gerenciadoDados();
-    bool carregaDados(string path , vector<Nave>& out_dados);
+    bool carregaDados(vector<Nave>& out_dados);
     bool adicionarNave(Nave* dados); 
+    bool editarPrioridade(string nome, int prioridade);
 };
 
 

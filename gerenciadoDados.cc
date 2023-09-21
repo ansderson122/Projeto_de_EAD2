@@ -6,16 +6,17 @@ using namespace std;
 #include "gerenciadoDados.h"
 #include <sstream>
 
-gerenciadoDados::gerenciadoDados(/* args */)
-{
+gerenciadoDados::gerenciadoDados(/* args */){
+    this->pathPrincipal = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves.txt";
+    this->pathSegundaria = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves/";
 }
 
 gerenciadoDados::~gerenciadoDados()
 {
 }
 
-bool gerenciadoDados::carregaDados(string path, vector<Nave>& out_dados) {
-    ifstream arquivo(path);
+bool gerenciadoDados::carregaDados(vector<Nave>& out_dados) {
+    ifstream arquivo(this->pathPrincipal);
 
     if (!arquivo.is_open()) {
         cerr << "Erro ao abrir o arquivo." << endl;
@@ -83,7 +84,7 @@ bool gerenciadoDados::criaArquivo(string path,string nome){
 
 bool gerenciadoDados::adicionarNave(Nave* dados){
 
-    string path1 = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves/" + dados->nome ;
+    string path1 = this->pathSegundaria + dados->nome ;
     if (this->criarDiretorio(path1)){
         this->criaArquivo(path1,"passageiros.txt");
         this->criaArquivo(path1,"recursos.txt");
@@ -92,7 +93,7 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     }
 
      // Abrir o arquivo para escrita e leitura no final
-    ofstream arquivo("C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves.txt", ios::app | ios::in);
+    ofstream arquivo(this->pathPrincipal, ios::app | ios::in);
 
     if (!arquivo.is_open()) {
         cerr << "Erro ao abrir o arquivo." << endl;
@@ -107,5 +108,8 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     return true;
 }
 
+bool gerenciadoDados::editarPrioridade(string nome, int prioridade){
+
+}
 
 
