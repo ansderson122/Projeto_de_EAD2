@@ -18,6 +18,8 @@ public:
     bool carregaDados(vector<Nave>& out_dados);
     bool adicionarNave(Nave* dados); 
     bool editarPrioridade(string nome, int prioridade);
+    bool registraPassageiro(string nomeNave, Passageiro * passageiro);
+    bool registraRecurso(string nomeNave, Recurso* recurso);
 };
 
 

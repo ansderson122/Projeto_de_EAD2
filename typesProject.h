@@ -7,7 +7,7 @@ typedef struct nave{
 	string nome;
     string classe;
     string recursosSuporteVidas;
-    string numeroPassageiros;
+    int numeroPassageiros;
     int nivelDeDoenca;
 
     // sobrescrevendo as seguinte operação 
@@ -23,12 +23,12 @@ typedef struct passageiro{
     string identificador;
 }Passageiro;
 
-typedef struct  recursor {
-    string nomeRecursor;
+typedef struct  recurso {
+    string nomerecurso;
     unsigned int quantideda;
     // 0 para não contem recusor de suporte a vida, e 1 contem 
-    int suporteVida; 
-}Recursor;
+    string suporteVida; 
+}Recurso;
 
 
 

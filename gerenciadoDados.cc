@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <windows.h>
+#include <string>
+#include <vector>
 using namespace std;
 
 #include "gerenciadoDados.h"
@@ -38,7 +40,7 @@ bool gerenciadoDados::carregaDados(vector<Nave>& out_dados) {
                 case 0: novaNave.nome = linha; break;
                 case 1: novaNave.classe = linha; break;
                 case 2: novaNave.recursosSuporteVidas = linha; break;
-                case 3: novaNave.numeroPassageiros = linha; break;
+                case 3: novaNave.numeroPassageiros = stoi(linha); break;
         }
         campoNum++;
     }
@@ -103,8 +105,10 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     arquivo.seekp(0, ios::end);
 
     // salvando dados 
-    arquivo <<  dados->nome + ";" + dados->classe + ";" + dados->recursosSuporteVidas + ";" + dados->numeroPassageiros + ";" + to_string(dados->nivelDeDoenca) + ";0" <<  endl ;
-    
+    arquivo <<  dados->nome + ";" + dados->classe + ";" + dados->recursosSuporteVidas + ";" +to_string(dados->numeroPassageiros) + ";" + to_string(dados->nivelDeDoenca) + ";0" <<  endl ;
+    arquivo.close();
+
+
     return true;
 }
 
@@ -150,5 +154,37 @@ bool gerenciadoDados::editarPrioridade(string nome, int prioridade) {
         return false;
     }
 
+    return true;
+}
+
+bool gerenciadoDados::registraPassageiro(string nomeNave, Passageiro * passageiro){
+    string path = this->pathSegundaria + nomeNave + "/passageiros.txt" ;
+
+    ofstream arquivo(path, ios::app | ios::in);
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo." << endl;
+        arquivo.close();
+        return false;
+    }
+    // Posicionar o ponteiro no final do arquivo
+    arquivo.seekp(0, ios::end);
+    arquivo << passageiro->nome + ";" + passageiro->planeta_de_origem +";"+ to_string(passageiro->idade) +";"+ passageiro->identificador << endl;
+    arquivo.close();
+    return true;
+}
+
+bool gerenciadoDados::registraRecurso(string nomeNave, Recurso * recurso){
+    string path = this->pathSegundaria + nomeNave + "/recurso.txt" ;
+
+    ofstream arquivo(path, ios::app | ios::in);
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo." << endl;
+        arquivo.close();
+        return false;
+    }
+    // Posicionar o ponteiro no final do arquivo
+    arquivo.seekp(0, ios::end);
+    arquivo << recurso->nomerecurso + ";" + to_string(recurso->quantideda) +";" + recurso->suporteVida << endl;
+    arquivo.close();
     return true;
 }

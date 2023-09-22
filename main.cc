@@ -30,7 +30,7 @@ void cadastraNave(gerenciadoDados gb){
     }
     
     
-    nave.numeroPassageiros = "0";
+    nave.numeroPassageiros = 0;
     gb.adicionarNave(&nave);
 
 
