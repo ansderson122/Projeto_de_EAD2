@@ -20,6 +20,7 @@ public:
     bool editarPrioridade(string nome, int prioridade);
     bool registraPassageiro(string nomeNave, Passageiro * passageiro);
     bool registraRecurso(string nomeNave, Recurso* recurso);
+    bool criaBancoDadosNave(string nomeNave);
 };
 
 

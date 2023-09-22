@@ -85,15 +85,6 @@ bool gerenciadoDados::criaArquivo(string path,string nome){
 
 
 bool gerenciadoDados::adicionarNave(Nave* dados){
-
-    string path1 = this->pathSegundaria + dados->nome ;
-    if (this->criarDiretorio(path1)){
-        this->criaArquivo(path1,"passageiros.txt");
-        this->criaArquivo(path1,"recursos.txt");
-    }else{
-        return false;
-    }
-
      // Abrir o arquivo para escrita e leitura no final
     ofstream arquivo(this->pathPrincipal, ios::app | ios::in);
 
@@ -187,4 +178,15 @@ bool gerenciadoDados::registraRecurso(string nomeNave, Recurso * recurso){
     arquivo << recurso->nomerecurso + ";" + to_string(recurso->quantideda) +";" + recurso->suporteVida << endl;
     arquivo.close();
     return true;
+}
+
+bool gerenciadoDados::criaBancoDadosNave(string nomeNave){
+    string path1 = this->pathSegundaria + nomeNave ;
+    if (this->criarDiretorio(path1)){
+        this->criaArquivo(path1,"passageiros.txt");
+        this->criaArquivo(path1,"recursos.txt");
+    }else{
+        return false;
+    }
+
 }
