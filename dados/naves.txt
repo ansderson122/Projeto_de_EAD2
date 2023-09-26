@@ -1,1 +1,5 @@
 Rocinante;Cruzador;sim;6;0;6
+g;des;nao;2;0;0
+jfj;555;sim;2;2;0
+4;4;sim;0;5;0
+rr;rr;sim;2;5;0

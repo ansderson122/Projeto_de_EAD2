@@ -12,7 +12,7 @@ void cadastraPassageiro(string nomeNave,int numeroPassageiro, gerenciadoDados gd
     Passageiro passageiro;
     for (int i = 0; i < numeroPassageiro; i++){
         cout << "Registre o passageiro " << i << endl; 
-        cout << "Nome :";
+        cout << "Nome: ";
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
         getline(cin, passageiro.nome);
 
@@ -24,26 +24,28 @@ void cadastraPassageiro(string nomeNave,int numeroPassageiro, gerenciadoDados gd
         gd.registraPassageiro(nomeNave, &passageiro);
     }
 
+
 }
 
 void cadastraRecursos(Nave *nave,gerenciadoDados gd){
     int numRecurso=6;
 
     cout << "Quanto recurso diferente existem na nave: ";
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
     cin >> numRecurso;
+
     Recurso recurso;
 
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
     for(int i = 0; i < numRecurso;i++){
         cout << "registre o recurso " << i << endl ;
-        cout << "Nome :" ;
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
+        cout << "Nome: " ;
         getline(cin, recurso.nomerecurso);
 
         cout << "Quantidade :";
         cin >> recurso.quantideda;
 
         cout << "recurso de suporte a vida(sim/nao):";
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
         getline(cin, recurso.suporteVida);
 
         while ((recurso.suporteVida != "sim" && recurso.suporteVida != "nao")){
@@ -55,6 +57,7 @@ void cadastraRecursos(Nave *nave,gerenciadoDados gd){
         }
 
         gd.registraRecurso(nave->nome,&recurso);
+
     }
 
 }
