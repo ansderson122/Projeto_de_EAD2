@@ -74,7 +74,6 @@ bool gerenciadoDados::criaArquivo(string path,string nome){
     ofstream arquivo(pathArquivo);
 
     if(arquivo.is_open()){
-        arquivo << endl;
         arquivo.close();
         return true;
     }
@@ -165,7 +164,7 @@ bool gerenciadoDados::registraPassageiro(string nomeNave, Passageiro * passageir
 }
 
 bool gerenciadoDados::registraRecurso(string nomeNave, Recurso * recurso){
-    string path = this->pathSegundaria + nomeNave + "/recurso.txt" ;
+    string path = this->pathSegundaria + nomeNave + "/recursos.txt" ;
 
     ofstream arquivo(path, ios::app | ios::in);
     if (!arquivo.is_open()) {
@@ -185,6 +184,7 @@ bool gerenciadoDados::criaBancoDadosNave(string nomeNave){
     if (this->criarDiretorio(path1)){
         this->criaArquivo(path1,"passageiros.txt");
         this->criaArquivo(path1,"recursos.txt");
+        return true;
     }else{
         return false;
     }
