@@ -37,10 +37,11 @@ bool gerenciadoDados::carregaDados(vector<Nave>& out_dados) {
 
         while (std::getline(ss, campo, ';')) {
             switch (campoNum) {
-                case 0: novaNave.nome = linha; break;
-                case 1: novaNave.classe = linha; break;
-                case 2: novaNave.recursosSuporteVidas = linha; break;
-                case 3: novaNave.numeroPassageiros = stoi(linha); break;
+                case 0: novaNave.nome = campo; break;
+                case 1: novaNave.classe = campo; break;
+                case 2: novaNave.recursosSuporteVidas = campo; break;
+                case 3: novaNave.numeroPassageiros = stoi(campo); break;
+                case 4: novaNave.nivelDeDoenca = stoi(campo); break;
         }
         campoNum++;
     }

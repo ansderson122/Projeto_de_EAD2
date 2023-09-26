@@ -106,11 +106,31 @@ void cadastraNave(gerenciadoDados gd){
     gd.adicionarNave(&nave);
 }
 
+void vetorPrint(vector<Nave> naves){
+    for(int i = 0 ; i< 2;i++){
+        cout << naves[i].nome << endl;
+    }
+}
+
+void calcularPrioridade(vector<Nave> naves,vector<float> pesos,gerenciadoDados gd){
+    
+}
+
 
 
 int main(void) {
     gerenciadoDados gd;
-    cadastraNave(gd);
+
+    // os pesos são usados para o calculo da prioridade
+    // e corresponde passageiros, recursos e doenças
+    vector<float> pesos = {0.2f, 0.5f, -0.8f};
+
+    vector<Nave> naves;
+    gd.carregaDados(naves);
+
+    
+
+    //cadastraNave(gd);
     //gd.editarPrioridade("Rocinante",6);
     
     

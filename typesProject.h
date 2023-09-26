@@ -10,6 +10,9 @@ typedef struct nave{
     int numeroPassageiros;
     int nivelDeDoenca;
 
+    vector<Recurso> rescursos;
+    vector<Passageiro> passageiros;
+
     // sobrescrevendo as seguinte operação 
     bool operator == (nave p) const {return prioridade == p.prioridade;}
     bool operator < (nave p) const {return prioridade < p.prioridade;}
