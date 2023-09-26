@@ -113,7 +113,7 @@ void vetorPrint(vector<Nave> naves){
 }
 
 void calcularPrioridade(vector<Nave> naves,vector<float> pesos,gerenciadoDados gd){
-    
+
 }
 
 
@@ -128,6 +128,7 @@ int main(void) {
     vector<Nave> naves;
     gd.carregaDados(naves);
 
+    cout << naves[0].passageiros[0].nome;
     
 
     //cadastraNave(gd);

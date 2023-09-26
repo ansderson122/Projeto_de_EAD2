@@ -42,9 +42,12 @@ bool gerenciadoDados::carregaDados(vector<Nave>& out_dados) {
                 case 2: novaNave.recursosSuporteVidas = campo; break;
                 case 3: novaNave.numeroPassageiros = stoi(campo); break;
                 case 4: novaNave.nivelDeDoenca = stoi(campo); break;
+            }
+            campoNum++;
         }
-        campoNum++;
-    }
+        this->carregaPassageiros(novaNave.nome,novaNave.passageiros); 
+        this->carregaRecursos(novaNave.nome,novaNave.rescursos);      
+
         // Adicione a novaNave ao vetor de dados
         out_dados.push_back(novaNave);
     }
@@ -189,5 +192,78 @@ bool gerenciadoDados::criaBancoDadosNave(string nomeNave){
     }else{
         return false;
     }
+}
+
+bool gerenciadoDados::carregaRecursos(string nomeNave ,vector<Recurso>& out_recursos){
+    string path = this->pathSegundaria + nomeNave + "/recursos.txt" ;
+
+    ifstream arquivo(path);
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo." << endl;
+        arquivo.close();
+        return false;
+    }
+   
+    string linha;
+    int campoNum;
+
+    while (getline(arquivo,linha)){
+        stringstream ss(linha);
+        string campo;
+
+        Recurso recurso;
+        campoNum = 0;
+
+        while (std::getline(ss, campo, ';')) {
+            switch (campoNum) {
+                case 0: recurso.nomerecurso = campo; break;
+                case 1: recurso.quantideda = stoi(campo); break;
+                case 2: recurso.suporteVida = campo; break;
+            }
+            campoNum++;
+        }
+        // Adicione a novaNave ao vetor de dados
+        out_recursos.push_back(recurso);
+    }
+
+    arquivo.close();
+    return true;
+}
+
+bool gerenciadoDados::carregaPassageiros(string nomeNave ,vector<Passageiro>& out_passageiros){
+    string path = this->pathSegundaria + nomeNave + "/passageiros.txt" ;
+
+    ifstream arquivo(path);
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo." << endl;
+        arquivo.close();
+        return false;
+    }
+   
+    string linha;
+    int campoNum;
+
+    while (getline(arquivo,linha)){
+        stringstream ss(linha);
+        string campo;
+
+        Passageiro passageiro;
+        campoNum = 0;
+
+        while (std::getline(ss, campo, ';')) {
+            switch (campoNum) {
+                case 0: passageiro.nome = campo; break;
+                case 1: passageiro.planeta_de_origem = campo; break;
+                case 2: passageiro.idade = stoi(campo); break;
+                case 3: passageiro.identificador = campo; break;
+            }
+            campoNum++;
+        }
+        // Adicione a novaNave ao vetor de dados
+        out_passageiros.push_back(passageiro);
+    }
+
+    arquivo.close();
+    return true;
 
 }
