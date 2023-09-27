@@ -10,13 +10,7 @@ public:
     ~heap();
 };
 
-heap::heap(/* args */)
-{
-}
 
-heap::~heap()
-{
-}
 
 
 #endif
