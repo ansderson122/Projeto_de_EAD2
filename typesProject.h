@@ -19,7 +19,7 @@ typedef struct  recurso {
 }Recurso;
 
 typedef struct nave{ 
-    int prioridade;
+    float prioridade;
 	string nome;
     string classe;
     string recursosSuporteVidas;

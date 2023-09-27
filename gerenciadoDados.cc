@@ -265,5 +265,5 @@ bool gerenciadoDados::carregaPassageiros(string nomeNave ,vector<Passageiro>& ou
 
     arquivo.close();
     return true;
-
 }
+

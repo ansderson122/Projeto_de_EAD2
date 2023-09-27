@@ -112,8 +112,34 @@ void vetorPrint(vector<Nave> naves){
     }
 }
 
-void calcularPrioridade(vector<Nave> naves,vector<float> pesos,gerenciadoDados gd){
+void calcularPrioridade(vector<Nave> naves,gerenciadoDados gd){
+    // para cada passageiro seram considerado 10 pontos
+    // para cada quilo de recurso seram adicionados 0,02 pontos
+    // para recursos de suporte a vidas seram 1 pontos
+    // para cada nivel de gravidade de doença seram menos 100 pontos por nivel
 
+    float prioridade;
+
+    for (int i = 0; i < naves.size(); i++){
+        prioridade = 0;
+
+        //passageiros
+        prioridade += 10 * naves[i].passageiros.size();
+
+        // rcursos
+        for(int j = 0; j < naves[i].rescursos.size();j++){
+            if (naves[i].rescursos[j].suporteVida == "sim"){
+                prioridade += naves[i].rescursos[j].quantideda;
+            }else{
+                prioridade += 0.02 * naves[i].rescursos[j].quantideda;
+            }
+        }
+
+        // doenças
+        prioridade -= 10 * naves[i].nivelDeDoenca;
+
+        naves[i].prioridade = prioridade;
+    }
 }
 
 
@@ -121,14 +147,10 @@ void calcularPrioridade(vector<Nave> naves,vector<float> pesos,gerenciadoDados g
 int main(void) {
     gerenciadoDados gd;
 
-    // os pesos são usados para o calculo da prioridade
-    // e corresponde passageiros, recursos e doenças
-    vector<float> pesos = {0.2f, 0.5f, -0.8f};
-
     vector<Nave> naves;
     gd.carregaDados(naves);
 
-    cout << naves[0].passageiros[0].nome;
+    // cout << naves[0].passageiros[0].nome;
     
 
     //cadastraNave(gd);
