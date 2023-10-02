@@ -3,15 +3,17 @@
 #include "heap.h"
 #include "typesProject.h"
 
-heap::heap(/* args */){
-    vector<Nave> naves;
+using namespace std;
+
+
+heap::heap(){
 }
 
 heap::~heap()
 {
 }
 
-void heap::subir(int i){
+void heap::subir(vector<Nave>& naves,int i){
     int j = i / 2;
     if (j >=1){
         if(naves[i] > naves[j]){
@@ -20,32 +22,34 @@ void heap::subir(int i){
             naves[i] = naves[j];
             naves[j] = temp;
 
-            this->subir(i);
+            this->subir(naves,i);
         }
     }
 }
 
-void heap::descer(int i, int n){
+void heap::descer(vector<Nave>& naves,int i, int n){
     int j = 2 * i;
+
     if (j <= n){
         if(j < n) {
             if (naves[j+1] > naves[j]){
                 j++;
             }
         }
-        if(naves[j] > naves[i]){
+        if(naves[j].prioridade > naves[i].prioridade){
+            cout << "ok" << endl;
             Nave temp;
             temp = naves[i];
             naves[i] = naves[j];
             naves[j] = temp;
 
-            this->descer(j,n);
+            this->descer(naves,j,n);
         }
     }
 }
 
-void heap::construiHeap(vector<Nave> naves){
+void heap::construiHeap(vector<Nave>& naves){
     for(int i = naves.size() /2 ; i >=1;i--){
-        this->descer(i,naves.size());
+        this->descer(naves,i,naves.size());
     }
 }

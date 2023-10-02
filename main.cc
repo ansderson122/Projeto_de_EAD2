@@ -8,10 +8,13 @@ using namespace std;
 #include "gerenciadoDados.h"
 #include "gerenciadoDados.cc"
 
+#include "heap.cc"
+#include "heap.h"
+
 void cadastraPassageiro(string nomeNave,int numeroPassageiro, gerenciadoDados gd){
     Passageiro passageiro;
     for (int i = 0; i < numeroPassageiro; i++){
-        cout << "Registre o passageiro " << i << endl; 
+        cout << "Registre o passageiro " << i << endl;
         cout << "Nome: ";
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
         getline(cin, passageiro.nome);
@@ -138,7 +141,7 @@ void calcularPrioridade(vector<Nave>& naves){
         // doenças
         prioridade -= 10 * naves[i].nivelDeDoenca;
 
-        cout << "prioridade " << prioridade << endl;
+        //cout << "prioridade " << prioridade << endl;
         naves[i].prioridade = prioridade;
     }
 }
@@ -147,15 +150,21 @@ void calcularPrioridade(vector<Nave>& naves){
 
 int main(void) {
     gerenciadoDados gd;
+    
 
-    vector<Nave> naves;
+    vector<Nave> naves(1);
     gd.carregaDados(naves);
+    heap H;
+   
 
     // cout << naves[0].passageiros[0].nome;
     calcularPrioridade(naves);
+    H.construiHeap(naves);
 
-    cout << naves[0].prioridade<< endl;
-    cout << naves[1].prioridade<< endl;
+    
+
+    cout <<naves[1].nome << naves[1].prioridade<< endl;
+    cout <<naves[2].nome << naves[2].prioridade<< endl;
 
     //cadastraNave(gd);
     //gd.editarPrioridade("Rocinante",6);

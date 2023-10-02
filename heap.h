@@ -6,12 +6,11 @@ class heap
 private:
     /* data */
 public:
-    vector<Nave> naves;
-    heap(/* args */);
+    heap();
     ~heap();
-    void subir(int i);
-    void descer(int i, int n);
-    void construiHeap(vector<Nave> naves);
+    void subir(vector<Nave>& naves,int i);
+    void descer(vector<Nave>& naves,int i, int n);
+    void construiHeap(vector<Nave>& naves);
 };
 
 
