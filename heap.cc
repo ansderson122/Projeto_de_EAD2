@@ -37,7 +37,6 @@ void heap::descer(vector<Nave>& naves,int i, int n){
             }
         }
         if(naves[j].prioridade > naves[i].prioridade){
-            cout << "ok" << endl;
             Nave temp;
             temp = naves[i];
             naves[i] = naves[j];
@@ -52,4 +51,11 @@ void heap::construiHeap(vector<Nave>& naves){
     for(int i = naves.size() /2 ; i >=1;i--){
         this->descer(naves,i,naves.size());
     }
+}
+
+void heap::remover(vector<Nave>& naves){
+    naves[1] = naves[naves.size()-1];
+    naves.pop_back();
+
+    this->descer(naves,1,naves.size());
 }

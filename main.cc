@@ -166,6 +166,12 @@ int main(void) {
     cout <<naves[1].nome << naves[1].prioridade<< endl;
     cout <<naves[2].nome << naves[2].prioridade<< endl;
 
+    H.remover(naves);
+    cout << endl;
+
+    cout <<naves[1].nome << naves[1].prioridade<< endl;
+
+
     //cadastraNave(gd);
     //gd.editarPrioridade("Rocinante",6);
     
