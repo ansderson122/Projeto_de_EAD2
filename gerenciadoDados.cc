@@ -106,38 +106,24 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     return true;
 }
 
-bool gerenciadoDados::editarPrioridade(string nome, int prioridade) {
-    ifstream arquivoLeitura(this->pathPrincipal);
+bool gerenciadoDados::editarArquivo(string nome, vector<Nave> naves) {
     ofstream arquivoTemp("temp.txt"); // Arquivo temporário para armazenar as edições
     string linha;
 
-    if (!arquivoLeitura.is_open() || !arquivoTemp.is_open()) {
+    if (!arquivoTemp.is_open()) {
         return false;
     }
 
-    while (getline(arquivoLeitura, linha)) {
-        stringstream ss(linha);
-        string campus;
-        getline(ss, campus, ';');
-
-        if (campus == nome) {
-            int i = 0;
-            string linhaEditada;
-
-            while (i <= 4) {
-                linhaEditada += campus + ";";
-                getline(ss, campus, ';');
-                i++;
-            }
-
-            linhaEditada += to_string(prioridade);
-            arquivoTemp << linhaEditada << endl; // Escreve a linha editada no arquivo temporário
-        } else {
-            arquivoTemp << linha << endl; // Mantém as outras linhas inalteradas
-        }
+    for(int i = 1; i < naves.size();i++){
+        arquivoTemp << 
+        naves[i].nome + ";" + 
+        naves[i].classe + ";" + 
+        naves[i].recursosSuporteVidas + ";" +
+        to_string(naves[i].numeroPassageiros) + ";" + 
+        to_string(naves[i].nivelDeDoenca) + ";0" <<  endl ;
     }
 
-    arquivoLeitura.close();
+
     arquivoTemp.close();
 
     // Substitui o arquivo original pelo arquivo temporário
