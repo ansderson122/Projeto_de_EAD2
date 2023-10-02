@@ -43,3 +43,9 @@ void heap::descer(int i, int n){
         }
     }
 }
+
+void heap::construiHeap(vector<Nave> naves){
+    for(int i = naves.size() /2 ; i >=1;i--){
+        this->descer(i,naves.size());
+    }
+}

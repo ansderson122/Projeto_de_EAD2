@@ -11,6 +11,7 @@ public:
     ~heap();
     void subir(int i);
     void descer(int i, int n);
+    void construiHeap(vector<Nave> naves);
 };
 
 
