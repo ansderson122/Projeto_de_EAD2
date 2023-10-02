@@ -24,3 +24,22 @@ void heap::subir(int i){
         }
     }
 }
+
+void heap::descer(int i, int n){
+    int j = 2 * i;
+    if (j <= n){
+        if(j < n) {
+            if (naves[j+1] > naves[j]){
+                j++;
+            }
+        }
+        if(naves[j] > naves[i]){
+            Nave temp;
+            temp = naves[i];
+            naves[i] = naves[j];
+            naves[j] = temp;
+
+            this->descer(j,n);
+        }
+    }
+}

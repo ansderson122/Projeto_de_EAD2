@@ -10,6 +10,7 @@ public:
     heap(/* args */);
     ~heap();
     void subir(int i);
+    void descer(int i, int n);
 };
 
 
