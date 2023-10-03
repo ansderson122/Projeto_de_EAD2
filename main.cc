@@ -110,7 +110,7 @@ void cadastraNave(gerenciadoDados gd){
 }
 
 void vetorPrint(vector<Nave> naves){
-    for(int i = 0 ; i< 2;i++){
+    for(int i = 1 ; i< naves.size();i++){
         cout << naves[i].nome << endl;
     }
 }
@@ -155,21 +155,49 @@ int main(void) {
     vector<Nave> naves(1);
     gd.carregaDados(naves);
     heap H;
-   
+
+    int op = -1;
 
     // cout << naves[0].passageiros[0].nome;
     calcularPrioridade(naves);
     H.construiHeap(naves);
 
+    while(op != 0){
+        cout << "Digite 1 para cadastrar uma nova nave" << endl;
+        cout << "Digite 2 para passa uma nave pelo a abetura" << endl;
+        cout << "Digite 3 para lista as naves" << endl;
+        cout << "Digite uma das opcoes: ";
+
+        // caso o usuario digete uma string
+        if(!(cin >> op)){
+            system("cls"); // limpa a tela
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Entrada invalida. Tente novamente." << endl;
+            op = -1;
+            continue;
+        }
+        
     
 
-    cout <<naves[1].nome << naves[1].prioridade<< endl;
-    cout <<naves[2].nome << naves[2].prioridade<< endl;
+        switch (op){
+            case 1:
+                cadastraNave(gd);
+                break;
+            case 2:
+                H.remover(naves);
+                break;
+            case 3:
+                vetorPrint(naves);
+                break;        
+        
+            default:
+                cout << "O numero digitado nao e uma opção valida" << endl;
+                break;
+        }
 
-    H.remover(naves);
-    cout << endl;
-
-    cout <<naves[1].nome << naves[1].prioridade<< endl;
+        system("cls"); // limpa a tela
+    } 
 
 
     //cadastraNave(gd);
