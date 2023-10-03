@@ -120,6 +120,29 @@ void vetorPrint(vector<Nave> naves){
     }
 }
 
+void calcularPrioridade(Nave &nave){
+    float prioridade = 0;
+
+    //passageiros
+    prioridade += 10 * nave.passageiros.size();
+
+        // rcursos
+    for(unsigned int j = 0; j < nave.rescursos.size();j++){
+        if (nave.rescursos[j].suporteVida == "sim"){
+            prioridade += nave.rescursos[j].quantideda;
+        }else{
+            prioridade += 0.02 * nave.rescursos[j].quantideda;
+        }
+    }
+
+    // doenças
+    prioridade -= 10 * nave.nivelDeDoenca;
+
+    //cout << "prioridade " << prioridade << endl;
+    nave.prioridade = prioridade;
+
+}
+
 void calcularPrioridade(vector<Nave>& naves){
     // para cada passageiro seram considerado 10 pontos
     // para cada quilo de recurso seram adicionados 0,02 pontos
@@ -151,6 +174,32 @@ void calcularPrioridade(vector<Nave>& naves){
     }
 }
 
+void alteraNivelDonca(vector<Nave>& naves, heap H){
+    string nomeNave;
+    int nivel;
+    cout << "Qual o nome da Nave: ";
+    cin >> nomeNave;
+    cout << "Qual o novo nivel de doença";
+    cin >> nivel;
+
+    for(unsigned int i = 1; i < naves.size();i++ ){
+        if(nomeNave == naves[i].nome){
+            //salvando a prioridade atuar
+            int pri = naves[i].prioridade;
+
+            naves[i].nivelDeDoenca = nivel;
+            calcularPrioridade(naves[i]); // recalculando o prioridade 
+            if(pri > naves[i].prioridade){ // decidido de aplica o descer ou subir
+                H.descer(naves,i,naves.size());
+            }else{
+                H.subir(naves,i);
+            }
+            cout << "A alteracao foi um sucesso" << endl;
+            break;
+        }
+    }
+}
+
 
 
 int main(void) {
@@ -172,6 +221,7 @@ int main(void) {
         cout << "Digite 1 para cadastrar uma nova nave" << endl;
         cout << "Digite 2 para passa uma nave pelo a abetura" << endl;
         cout << "Digite 3 para lista as naves" << endl;
+        cout << "Digite 4 para altera o nivel de doenca de uma naves" << endl;
         cout << "Digite uma das opcoes: ";
 
         // caso o usuario digete uma string
@@ -203,7 +253,12 @@ int main(void) {
                 
             case 3:
                 vetorPrint(naves);
-                break;        
+                break; 
+            case 4:
+                alteraNivelDonca(naves,H);
+                
+                //gd.salvarArquivo(naves)
+                   
         
             default:
                 cout << "O numero digitado nao e uma opcao valida" << endl;
