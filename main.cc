@@ -110,7 +110,7 @@ void cadastraNave(gerenciadoDados gd){
 }
 
 void vetorPrint(vector<Nave> naves){
-    for(int i = 1 ; i< naves.size();i++){
+    for(unsigned int i = 1 ; i< naves.size();i++){
         cout << naves[i].nome << endl;
     }
 }
