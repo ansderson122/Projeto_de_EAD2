@@ -12,6 +12,7 @@ public:
     void descer(vector<Nave>& naves,int i, int n);
     void construiHeap(vector<Nave>& naves);
     void remover(vector<Nave>& naves);
+    void adicionar(vector<Nave>& naves);
 };
 
 

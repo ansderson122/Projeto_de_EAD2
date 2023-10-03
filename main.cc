@@ -65,7 +65,7 @@ void cadastraRecursos(Nave *nave,gerenciadoDados gd){
 
 }
 
-void cadastraNave(gerenciadoDados gd){
+void cadastraNave(gerenciadoDados gd,vector<Nave>& naves){
     Nave nave;
     nave.recursosSuporteVidas = "nao";
     nave.numeroPassageiros = 2;
@@ -107,6 +107,7 @@ void cadastraNave(gerenciadoDados gd){
 
     // cadastra Nave
     gd.adicionarNave(&nave);
+    naves.push_back(nave);
 }
 
 void vetorPrint(vector<Nave> naves){
@@ -182,10 +183,13 @@ int main(void) {
 
         switch (op){
             case 1:
-                cadastraNave(gd);
+                cadastraNave(gd,naves);
+                H.adicionar(naves);
+                gd.salvarArquivo(naves);
                 break;
             case 2:
                 H.remover(naves);
+                //gd.salvarArquivo(naves);
                 break;
             case 3:
                 vetorPrint(naves);

@@ -22,7 +22,7 @@ void heap::subir(vector<Nave>& naves,int i){
             naves[i] = naves[j];
             naves[j] = temp;
 
-            this->subir(naves,i);
+            this->subir(naves,j);
         }
     }
 }
@@ -58,4 +58,9 @@ void heap::remover(vector<Nave>& naves){
     naves.pop_back();
 
     this->descer(naves,1,naves.size());
+}
+
+void heap::adicionar(vector<Nave>& naves){
+    int i = naves.size()-1;
+    this->subir(naves,1);
 }
