@@ -111,7 +111,7 @@ void cadastraNave(gerenciadoDados gd){
 
 void vetorPrint(vector<Nave> naves){
     for(unsigned int i = 1 ; i< naves.size();i++){
-        cout << naves[i].nome << endl;
+        cout << naves[i].nome << "com a prioridade de " << naves[i].prioridade << endl;
     }
 }
 
