@@ -24,6 +24,10 @@ void cadastraPassageiro(string nomeNave,int numeroPassageiro, gerenciadoDados gd
 
         cout << "Idade :";
         cin >> passageiro.idade;
+
+        cout << "O identificado: ";
+        cin >> passageiro.identificador;
+
         gd.registraPassageiro(nomeNave, &passageiro);
     }
 
