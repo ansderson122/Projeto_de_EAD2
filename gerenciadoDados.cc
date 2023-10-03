@@ -106,7 +106,7 @@ bool gerenciadoDados::adicionarNave(Nave* dados){
     return true;
 }
 
-bool gerenciadoDados::editarArquivo(string nome, vector<Nave> naves) {
+bool gerenciadoDados::salvarArquivo(string nome, vector<Nave> naves) {
     ofstream arquivoTemp("temp.txt"); // Arquivo temporário para armazenar as edições
     string linha;
 
@@ -123,7 +123,7 @@ bool gerenciadoDados::editarArquivo(string nome, vector<Nave> naves) {
         to_string(naves[i].nivelDeDoenca) + ";0" <<  endl ;
     }
 
-
+    arquivoTemp << endl;
     arquivoTemp.close();
 
     // Substitui o arquivo original pelo arquivo temporário
