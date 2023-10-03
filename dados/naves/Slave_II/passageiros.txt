@@ -1,0 +1,2 @@
+Jango Fett;Concord Dawn;45;SS001
+Zam Wesell;Zolan;32;SS002

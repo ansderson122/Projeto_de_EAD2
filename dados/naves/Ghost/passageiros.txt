@@ -1,0 +1,5 @@
+Hera Syndulla;Ryloth;28;GH001
+Kanan Jarrus;Coruscant;30;GH002
+Ezra Bridger;Lothal;17;GH003
+Sabine Wren;Krownest;21;GH004
+Garazeb "Zeb" Orrelios;Lasan;33;GH005

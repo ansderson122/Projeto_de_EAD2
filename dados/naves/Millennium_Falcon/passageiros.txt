@@ -1,0 +1,5 @@
+Han Solo;Corellia;35;MF001
+Chewbacca;Kashyyyk;200+;MF002
+Leia Organa;Alderaan (destruído);19;MF003
+Luke Skywalker;Tatooine;19;MF004
+Obi-Wan Kenobi;Stewjon (expandido);57;MF005

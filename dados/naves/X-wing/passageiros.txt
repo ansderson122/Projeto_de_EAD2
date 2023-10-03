@@ -1,0 +1,5 @@
+Piloto X-wing 1;Desconhecido;30;XW001
+Piloto X-wing 2;Desconhecido;28;XW002
+Piloto X-wing 3;Desconhecido;32;XW003
+Piloto X-wing 4;Desconhecido;29;XW004
+Piloto X-wing 5;Desconhecido;27;XW005

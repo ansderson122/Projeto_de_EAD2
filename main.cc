@@ -116,7 +116,7 @@ void cadastraNave(gerenciadoDados gd,vector<Nave>& naves){
 
 void vetorPrint(vector<Nave> naves){
     for(unsigned int i = 1 ; i< naves.size();i++){
-        cout << naves[i].nome << "com a prioridade de " << naves[i].prioridade << endl;
+        cout << naves[i].nome <<  " com a prioridade de " << naves[i].prioridade << endl;
     }
 }
 
@@ -168,6 +168,7 @@ int main(void) {
     H.construiHeap(naves);
 
     while(op != 0){
+        cout << "Digite 0 para sair" << endl;
         cout << "Digite 1 para cadastrar uma nova nave" << endl;
         cout << "Digite 2 para passa uma nave pelo a abetura" << endl;
         cout << "Digite 3 para lista as naves" << endl;
@@ -182,9 +183,13 @@ int main(void) {
             op = -1;
             continue;
         }
+        if(op == 0){
+            cout << "Desligando o sistema" << endl;
+            break;
+        }
         
     
-
+        system("cls"); // limpa a tela
         switch (op){
             case 1:
                 cadastraNave(gd,naves);
@@ -192,19 +197,20 @@ int main(void) {
                 gd.salvarArquivo(naves);
                 break;
             case 2:
+                cout << "A nave " << naves[1].nome << " passo pela o abetura"<<endl<<endl;
                 H.remover(naves);
-                //gd.salvarArquivo(naves);
-                break;
+                //gd.salvarArquivo(naves)
+                
             case 3:
                 vetorPrint(naves);
                 break;        
         
             default:
-                cout << "O numero digitado nao e uma opção valida" << endl;
+                cout << "O numero digitado nao e uma opcao valida" << endl;
                 break;
         }
 
-        system("cls"); // limpa a tela
+       cout<<endl<<endl;
     } 
 
 

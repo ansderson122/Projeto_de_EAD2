@@ -62,5 +62,5 @@ void heap::remover(vector<Nave>& naves){
 
 void heap::adicionar(vector<Nave>& naves){
     int i = naves.size()-1;
-    this->subir(naves,1);
+    this->subir(naves,i);
 }

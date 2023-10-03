@@ -1,0 +1,5 @@
+Piloto TIE Fighter 1;Desconhecido;25;TIE001
+Piloto TIE Fighter 2;Desconhecido;27;TIE002
+Piloto TIE Fighter 3;Desconhecido;24;TIE003
+Piloto TIE Fighter 4;Desconhecido;26;TIE004
+Piloto TIE Fighter 5;Desconhecido;28;TIE005

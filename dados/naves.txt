@@ -1,2 +1,10 @@
 rr;rr;sim;2;5;0
 Rocinante;Cruzador;sim;6;0;0
+Millennium_Falcon;Cargueiro YT-1300;Sim;10;3
+X-wing;Caça;Não;1;0
+TIE_Fighter;Caça;Não;1;0
+Slave_I;Caça de Patrulha;Sim;2;1
+Slave_II;Caça de Patrulha;Sim;2;1
+Ghost;Corveta VCX-100;Sim;8;2
+Slave_III;Caça de Patrulha;Sim;2;1
+Razor_Crest;Nave de Transporte;Sim;6;2

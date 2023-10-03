@@ -1,0 +1,5 @@
+Boba Fett;Kamino;35;SF001
+Aurra Sing;Nar Shaddaa;30;SF002
+Embo;Phatrong;40;SF003
+Dengar;Corellia;45;SF004
+Sugi;Zolan;38;SF005
