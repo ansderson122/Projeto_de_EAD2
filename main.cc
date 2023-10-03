@@ -174,7 +174,8 @@ void calcularPrioridade(vector<Nave>& naves){
     }
 }
 
-void alteraNivelDonca(vector<Nave>& naves, heap H){
+void alteraNivelDoenca(vector<Nave>& naves, heap H){
+    cout << "Altera Nivel de doenca" << endl;
     string nomeNave;
     int nivel;
     cout << "Qual o nome da Nave: ";
@@ -200,6 +201,31 @@ void alteraNivelDonca(vector<Nave>& naves, heap H){
     }
 }
 
+void adicionarClandestinos(vector<Nave> naves,heap H, gerenciadoDados gd){
+    cout << "Cadastra clandestinos" << endl;
+    string nomeNave;
+    int num;
+    cout << "Qual o nome da Nave: ";
+    cin >> nomeNave;
+    cout << "Qual e a quantidade de clandestinos: ";
+    cin >> num;
+
+    for(unsigned int i = 1; i < naves.size();i++ ){
+        if(nomeNave == naves[i].nome){
+            naves[i].numeroPassageiros += num;
+            
+            cadastraPassageiro(naves[i].nome,num,gd);
+            gd.carregaDados(naves);
+            calcularPrioridade(naves[i]); // recalculando o prioridade 
+            H.subir(naves,i);
+            
+            cout << "A alteracao foi um sucesso" << endl;
+            break;
+        }
+    }
+
+}
+
 
 
 int main(void) {
@@ -222,6 +248,7 @@ int main(void) {
         cout << "Digite 2 para passa uma nave pelo a abetura" << endl;
         cout << "Digite 3 para lista as naves" << endl;
         cout << "Digite 4 para altera o nivel de doenca de uma naves" << endl;
+        cout << "Digite 5 para cadrastra clandestinos em uma nave" << endl;
         cout << "Digite uma das opcoes: ";
 
         // caso o usuario digete uma string
@@ -255,23 +282,19 @@ int main(void) {
                 vetorPrint(naves);
                 break; 
             case 4:
-                alteraNivelDonca(naves,H);
+                alteraNivelDoenca(naves,H);
                 
                 //gd.salvarArquivo(naves)
-                   
-        
+                break;
+            case 5:
+                adicionarClandestinos(naves,H,gd);
+                break;
             default:
                 cout << "O numero digitado nao e uma opcao valida" << endl;
                 break;
         }
 
        cout<<endl<<endl;
-    } 
-
-
-    //cadastraNave(gd);
-    //gd.editarPrioridade("Rocinante",6);
-    
-    
+    }     
     return 0;
 }
