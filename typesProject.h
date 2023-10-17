@@ -18,6 +18,8 @@ typedef struct  recurso {
     string suporteVida; 
 }Recurso;
 
+
+
 typedef struct nave{ 
     float prioridade;
 	string nome;
@@ -35,6 +37,18 @@ typedef struct nave{
     bool operator > (nave p) const {return prioridade > p.prioridade;}
 }Nave; 
 
+inline string geraSigla(vector<Recurso> rescursos){
+    string sigla = "";
+    for(unsigned int i = 0; i < rescursos.size();i++){
+        sigla += rescursos[i].nomerecurso[0];
+    }
+    return sigla;
+}
+
+typedef struct grupo{
+    Nave naves[6];
+    Grupo *prox;
+}Grupo;
 
 
 #endif

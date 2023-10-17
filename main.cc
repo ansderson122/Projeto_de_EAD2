@@ -3,13 +3,12 @@
 #include <string>
 #include <limits>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 #include "gerenciadoDados.h"
 #include "gerenciadoDados.cc"
 
-#include "heap.cc"
-#include "heap.h"
 
 void cadastraPassageiro(string nomeNave,int numeroPassageiro, gerenciadoDados gd){
     Passageiro passageiro;
@@ -174,7 +173,7 @@ void calcularPrioridade(vector<Nave>& naves){
     }
 }
 
-void alteraNivelDoenca(vector<Nave>& naves, heap H){
+void alteraNivelDoenca(vector<Nave>& naves){
     cout << "Altera Nivel de doenca" << endl;
     string nomeNave;
     int nivel;
@@ -190,18 +189,14 @@ void alteraNivelDoenca(vector<Nave>& naves, heap H){
 
             naves[i].nivelDeDoenca = nivel;
             calcularPrioridade(naves[i]); // recalculando o prioridade 
-            if(pri > naves[i].prioridade){ // decidido de aplica o descer ou subir
-                H.descer(naves,i,naves.size());
-            }else{
-                H.subir(naves,i);
-            }
+           
             cout << "A alteracao foi um sucesso" << endl;
             break;
         }
     }
 }
 
-void adicionarClandestinos(vector<Nave> naves,heap H, gerenciadoDados gd){
+void adicionarClandestinos(vector<Nave> naves, gerenciadoDados gd){
     cout << "Cadastra clandestinos" << endl;
     string nomeNave;
     int num;
@@ -217,7 +212,7 @@ void adicionarClandestinos(vector<Nave> naves,heap H, gerenciadoDados gd){
             cadastraPassageiro(naves[i].nome,num,gd);
             gd.carregaDados(naves);
             calcularPrioridade(naves[i]); // recalculando o prioridade 
-            H.subir(naves,i);
+            
             
             cout << "A alteracao foi um sucesso" << endl;
             break;
@@ -232,69 +227,18 @@ int main(void) {
     gerenciadoDados gd;
     
 
-    vector<Nave> naves(1);
+    vector<Nave> naves;
     gd.carregaDados(naves);
-    heap H;
 
-    int op = -1;
-
-    // cout << naves[0].passageiros[0].nome;
-    calcularPrioridade(naves);
-    H.construiHeap(naves);
-
-    while(op != 0){
-        cout << "Digite 0 para sair" << endl;
-        cout << "Digite 1 para cadastrar uma nova nave" << endl;
-        cout << "Digite 2 para passa uma nave pelo a abetura" << endl;
-        cout << "Digite 3 para lista as naves" << endl;
-        cout << "Digite 4 para altera o nivel de doenca de uma naves" << endl;
-        cout << "Digite 5 para cadrastra clandestinos em uma nave" << endl;
-        cout << "Digite uma das opcoes: ";
-
-        // caso o usuario digete uma string
-        if(!(cin >> op)){
-            system("cls"); // limpa a tela
-            cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            cout << "Entrada invalida. Tente novamente." << endl;
-            op = -1;
-            continue;
-        }
-        if(op == 0){
-            cout << "Desligando o sistema" << endl;
-            break;
-        }
-        
+    map<string, Grupo> tabelaGrupos;
     
-        system("cls"); // limpa a tela
-        switch (op){
-            case 1:
-                cadastraNave(gd,naves);
-                H.adicionar(naves);
-                gd.salvarArquivo(naves);
-                break;
-            case 2:
-                cout << "A nave " << naves[1].nome << " passo pela o abetura"<<endl<<endl;
-                H.remover(naves);
-                //gd.salvarArquivo(naves)
-                
-            case 3:
-                vetorPrint(naves);
-                break; 
-            case 4:
-                alteraNivelDoenca(naves,H);
-                
-                //gd.salvarArquivo(naves)
-                break;
-            case 5:
-                adicionarClandestinos(naves,H,gd);
-                break;
-            default:
-                cout << "O numero digitado nao e uma opcao valida" << endl;
-                break;
-        }
 
-       cout<<endl<<endl;
-    }     
-    return 0;
+
+
+    
+
+
+    cout << geraSigla(naves[2].rescursos);
+    return 1;
+
 }
