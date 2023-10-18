@@ -1,5 +1,4 @@
-Combustivel;5000;não
-Agua;100;sim
-Comida;30;sim
-Suprimentos Medicos;1;sim
-Droides;1;não
+Combustivel;7000;sim
+Agua;300;sim
+Comida;60;sim
+

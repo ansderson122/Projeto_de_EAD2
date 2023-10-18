@@ -1,5 +1,3 @@
-Combustivel;6000;sim
-Agua;500;sim
-Comida;30;sim
-Suprimentos Medicos;2;sim
 Droides;1;não
+Suprimentos Medicos;2;sim
+Armas;30;não

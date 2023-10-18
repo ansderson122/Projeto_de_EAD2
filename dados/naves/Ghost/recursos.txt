@@ -1,4 +1,3 @@
 Combustivel;7000;sim
 Agua;300;sim
 Comida;60;sim
-Droides;1;sim

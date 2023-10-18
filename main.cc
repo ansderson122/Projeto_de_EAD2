@@ -4,6 +4,7 @@
 #include <limits>
 #include <algorithm>
 #include <map>
+#include <queue>
 
 using namespace std;
 #include "gerenciadoDados.h"
@@ -229,17 +230,21 @@ bool existeSiglaNoGrupo(Grupo grupo, string sigla){
     return false;
 }
 
-bool adicionaElemento(Grupo& grupo, Nave nave){
+bool adicionaElemento(Grupo& grupo, Nave nave,queue<string>& filaSaida){
     // posição para se colocada a nave
     int pos = grupo.pos;
 
     if(pos < 6 && !(existeSiglaNoGrupo(grupo,nave.siglaRecursos))){
             grupo.naves[pos] = nave;
             grupo.pos++;
+
+            if(grupo.pos == 6){
+                filaSaida.push(geraSigla(nave.rescursos));
+            }
             return true;
     }else if (grupo.prox != nullptr){
         Grupo proximoGrupo = *(grupo.prox);
-        adicionaElemento(proximoGrupo,nave);
+        adicionaElemento(proximoGrupo,nave,filaSaida);
         return true;
     }else{
         Grupo* novaGrupo = new Grupo;
@@ -254,7 +259,7 @@ bool adicionaElemento(Grupo& grupo, Nave nave){
 }
 
 
-bool geraTabela(vector<Nave> naves,map<string, Grupo>& tabelaGrupos){
+bool geraTabela(vector<Nave> naves,map<string, Grupo>& tabelaGrupos,queue<string>& filaSaida){
     string sigla;
     for(unsigned int i = 0; i < naves.size();i++){
         sigla = geraSigla(naves[i].rescursos);
@@ -263,7 +268,7 @@ bool geraTabela(vector<Nave> naves,map<string, Grupo>& tabelaGrupos){
         auto it = tabelaGrupos.find(sigla);
         if (it != tabelaGrupos.end()) {
             // se existe no mapa
-            adicionaElemento(tabelaGrupos[sigla], naves[i]);
+            adicionaElemento(tabelaGrupos[sigla], naves[i],filaSaida);
         }else{
             // nao existe no map 
             
@@ -295,6 +300,17 @@ void printTabela( map<string, Grupo> tabelaGrupos){
     for (const auto& par : tabelaGrupos) {
         cout << "Chave: " << par.first << std::endl;
         printGrupo(par.second);
+        cout << endl;
+    }
+}
+
+void removerGrupo(string chave,map<string, Grupo>& tabelaGrupos){
+    Grupo grupo = tabelaGrupos[chave];
+
+    if(grupo.prox == nullptr){
+        tabelaGrupos.erase(chave);
+    }else{
+        tabelaGrupos[chave] = *grupo.prox;
     }
 }
 
@@ -304,20 +320,23 @@ void printTabela( map<string, Grupo> tabelaGrupos){
 
 int main(void) {
     gerenciadoDados gd;
+    queue<string> filaSaida;
     
 
     vector<Nave> naves;
     gd.carregaDados(naves);
 
     map<string, Grupo> tabelaGrupos;
-    geraTabela(naves,tabelaGrupos);
-    printTabela(tabelaGrupos);
-
-
-    
-
-
+    geraTabela(naves,tabelaGrupos,filaSaida);
+    //printTabela(tabelaGrupos);
+    //cout << filaSaida.front() ;
     //cout << geraSigla(naves[2].rescursos);
+    //removerGrupo(filaSaida.front(),tabelaGrupos);
+    //printTabela(tabelaGrupos);
+
+
+
+
     return 1;
 
 }

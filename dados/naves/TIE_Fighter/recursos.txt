@@ -1,5 +1,3 @@
-Combustivel;2000;não
-Agua;10;sim
-Comida;0;sim
-Suprimentos Medicos;1;não
-Droides;0;não
+Suprimentos Medicos;2;sim
+Armas;30;não
+Droides;1;não

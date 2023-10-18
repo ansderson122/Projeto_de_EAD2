@@ -50,7 +50,7 @@ inline string geraSigla(vector<Recurso> rescursos){
 
 typedef struct grupo{
     Nave naves[6];
-    grupo *prox;
+    grupo *prox = nullptr;
     int pos = 0;
 }Grupo;
 
