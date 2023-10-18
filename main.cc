@@ -69,7 +69,7 @@ void cadastraRecursos(Nave *nave,gerenciadoDados gd){
 
 }
 
-void cadastraNave(gerenciadoDados gd,vector<Nave>& naves){
+Nave cadastraNave(gerenciadoDados gd){
     Nave nave;
     nave.recursosSuporteVidas = "nao";
     nave.numeroPassageiros = 2;
@@ -111,7 +111,8 @@ void cadastraNave(gerenciadoDados gd,vector<Nave>& naves){
 
     // cadastra Nave
     gd.adicionarNave(&nave);
-    naves.push_back(nave);
+    return nave;
+
 }
 
 void vetorPrint(vector<Nave> naves){
@@ -230,7 +231,7 @@ bool existeSiglaNoGrupo(Grupo grupo, string sigla){
     return false;
 }
 
-bool adicionaElemento(Grupo& grupo, Nave nave,queue<string>& filaSaida){
+bool adicionaNaveGrupo(Grupo& grupo, Nave nave,queue<string>& filaSaida){
     // posição para se colocada a nave
     int pos = grupo.pos;
 
@@ -244,7 +245,7 @@ bool adicionaElemento(Grupo& grupo, Nave nave,queue<string>& filaSaida){
             return true;
     }else if (grupo.prox != nullptr){
         Grupo proximoGrupo = *(grupo.prox);
-        adicionaElemento(proximoGrupo,nave,filaSaida);
+        adicionaNaveGrupo(proximoGrupo,nave,filaSaida);
         return true;
     }else{
         Grupo* novaGrupo = new Grupo;
@@ -268,7 +269,7 @@ bool geraTabela(vector<Nave> naves,map<string, Grupo>& tabelaGrupos,queue<string
         auto it = tabelaGrupos.find(sigla);
         if (it != tabelaGrupos.end()) {
             // se existe no mapa
-            adicionaElemento(tabelaGrupos[sigla], naves[i],filaSaida);
+            adicionaNaveGrupo(tabelaGrupos[sigla], naves[i],filaSaida);
         }else{
             // nao existe no map 
             
@@ -279,6 +280,13 @@ bool geraTabela(vector<Nave> naves,map<string, Grupo>& tabelaGrupos,queue<string
         }
         
     }
+    return true;
+}
+
+bool adicionaNaveTabela(Nave nave,map<string, Grupo>& tabelaGrupos,queue<string>& filaSaida){
+    string chave = geraSigla(nave.rescursos);
+
+    adicionaNaveGrupo(tabelaGrupos[chave],nave,filaSaida);
     return true;
 }
 
@@ -321,6 +329,7 @@ void removerGrupo(string chave,map<string, Grupo>& tabelaGrupos){
 int main(void) {
     gerenciadoDados gd;
     queue<string> filaSaida;
+    Nave nave;
     
 
     vector<Nave> naves;
@@ -333,6 +342,52 @@ int main(void) {
     //cout << geraSigla(naves[2].rescursos);
     //removerGrupo(filaSaida.front(),tabelaGrupos);
     //printTabela(tabelaGrupos);
+    int op = -1;
+    while(op != 0){
+        cout << "Digite 0 para sair" << endl;
+        cout << "Digite 1 para cadastrar uma nova nave" << endl;
+        cout << "Digite 2 para passa uma grupo de naves pelo a abetura" << endl;
+        cout << "Digite 3 para lista os grupos de naves" << endl;
+        cout << "Digite uma das opcoes: ";
+
+        // caso o usuario digete uma string
+        if(!(cin >> op)){
+            system("cls"); // limpa a tela
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Entrada invalida. Tente novamente." << endl;
+            op = -1;
+            continue;
+        }
+        if(op == 0){
+            cout << "Desligando o sistema" << endl;
+            break;
+        }
+        
+    
+        system("cls"); // limpa a tela
+        switch (op){
+            case 1:
+                nave = cadastraNave(gd);
+                
+
+                break;
+            case 2:
+                cout << "A nave " << naves[1].nome << " passo pela o abetura"<<endl<<endl;
+                
+                //gd.salvarArquivo(naves)
+                
+            case 3:
+                vetorPrint(naves);
+                break; 
+
+            default:
+                cout << "O numero digitado nao e uma opcao valida" << endl;
+                break;
+        }
+
+       cout<<endl<<endl;
+    } 
 
 
 
