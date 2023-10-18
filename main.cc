@@ -111,6 +111,7 @@ Nave cadastraNave(gerenciadoDados gd){
 
     // cadastra Nave
     gd.adicionarNave(&nave);
+    
     return nave;
 
 }
@@ -291,9 +292,15 @@ bool adicionaNaveTabela(Nave nave,map<string, Grupo>& tabelaGrupos,queue<string>
 }
 
 void printGrupo(Grupo grupo){
-    cout << "Nome das naves: ";
+    cout << "Nome das naves: " << endl;
+    int i = 1;
     for(Nave nave : grupo.naves){
-        cout << nave.nome << " ";
+        if(nave.nome.empty()){
+           break;
+        }
+        cout << i << " " << nave.nome << endl;
+        i++;  
+        
     }
     cout << endl;
     if(grupo.prox != nullptr){
@@ -304,11 +311,12 @@ void printGrupo(Grupo grupo){
 }
 
 void printTabela( map<string, Grupo> tabelaGrupos){
-    
+    int j = 1;
     for (const auto& par : tabelaGrupos) {
-        cout << "Chave: " << par.first << std::endl;
+        cout << "Grupo "<< j << endl;
         printGrupo(par.second);
         cout << endl;
+        j++;
     }
 }
 
@@ -343,6 +351,8 @@ int main(void) {
     //removerGrupo(filaSaida.front(),tabelaGrupos);
     //printTabela(tabelaGrupos);
     int op = -1;
+    string chave;
+    int w;
     while(op != 0){
         cout << "Digite 0 para sair" << endl;
         cout << "Digite 1 para cadastrar uma nova nave" << endl;
@@ -369,16 +379,26 @@ int main(void) {
         switch (op){
             case 1:
                 nave = cadastraNave(gd);
-                
-
+                adicionaNaveTabela(nave,tabelaGrupos,filaSaida);         
                 break;
             case 2:
-                cout << "A nave " << naves[1].nome << " passo pela o abetura"<<endl<<endl;
-                
-                //gd.salvarArquivo(naves)
-                
+                if(!filaSaida.empty()){
+                    w = 1;
+                    cout << "As naves listada a baixo passaram pela a abertura"<<endl;
+                    cout << "Nome das naves: "<< endl;
+                    for(Nave nave : tabelaGrupos[filaSaida.front()].naves){
+                        cout << w << " " << nave.nome << endl;
+                        w++;
+                    }
+                    cout << endl;
+                    removerGrupo(filaSaida.front(),tabelaGrupos);
+                    filaSaida.pop();
+                }else{
+                    cout << "Nao ha grupo completo para passa" << endl;
+                }
+                break;          
             case 3:
-                vetorPrint(naves);
+                printTabela(tabelaGrupos);
                 break; 
 
             default:
