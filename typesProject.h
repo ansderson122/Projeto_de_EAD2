@@ -16,6 +16,10 @@ typedef struct  recurso {
     unsigned int quantideda;
     // 0 para não contem recusor de suporte a vida, e 1 contem 
     string suporteVida; 
+
+    bool operator<(const recurso& other) const {
+        return nomerecurso < other.nomerecurso;
+    }
 }Recurso;
 
 
@@ -31,23 +35,23 @@ typedef struct nave{
     vector<Recurso> rescursos;
     vector<Passageiro> passageiros;
 
-    // sobrescrevendo as seguinte operação 
-    bool operator == (nave p) const {return prioridade == p.prioridade;}
-    bool operator < (nave p) const {return prioridade < p.prioridade;}
-    bool operator > (nave p) const {return prioridade > p.prioridade;}
+    string siglaRecursos;
+
 }Nave; 
 
 inline string geraSigla(vector<Recurso> rescursos){
+    sort(rescursos.begin(), rescursos.end());
     string sigla = "";
     for(unsigned int i = 0; i < rescursos.size();i++){
-        sigla += rescursos[i].nomerecurso[0];
+        sigla += rescursos[i].nomerecurso;
     }
     return sigla;
 }
 
 typedef struct grupo{
     Nave naves[6];
-    Grupo *prox;
+    grupo *prox;
+    int pos = 0;
 }Grupo;
 
 

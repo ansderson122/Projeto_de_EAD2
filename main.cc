@@ -185,7 +185,7 @@ void alteraNivelDoenca(vector<Nave>& naves){
     for(unsigned int i = 1; i < naves.size();i++ ){
         if(nomeNave == naves[i].nome){
             //salvando a prioridade atuar
-            int pri = naves[i].prioridade;
+            //int pri = naves[i].prioridade;
 
             naves[i].nivelDeDoenca = nivel;
             calcularPrioridade(naves[i]); // recalculando o prioridade 
@@ -218,8 +218,87 @@ void adicionarClandestinos(vector<Nave> naves, gerenciadoDados gd){
             break;
         }
     }
+}
+
+bool existeSiglaNoGrupo(Grupo grupo, string sigla){
+    for(int i = 0; i < grupo.pos; i++){
+        if(grupo.naves[i].siglaRecursos == sigla){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool adicionaElemento(Grupo& grupo, Nave nave){
+    // posição para se colocada a nave
+    int pos = grupo.pos;
+
+    if(pos < 6 && !(existeSiglaNoGrupo(grupo,nave.siglaRecursos))){
+            grupo.naves[pos] = nave;
+            grupo.pos++;
+            return true;
+    }else if (grupo.prox != nullptr){
+        Grupo proximoGrupo = *(grupo.prox);
+        adicionaElemento(proximoGrupo,nave);
+        return true;
+    }else{
+        Grupo* novaGrupo = new Grupo;
+        grupo.prox = novaGrupo;
+        novaGrupo->naves[0] = nave;
+        novaGrupo->prox = nullptr;
+        novaGrupo->pos++;
+        return true; 
+    }
+    return false;         
 
 }
+
+
+bool geraTabela(vector<Nave> naves,map<string, Grupo>& tabelaGrupos){
+    string sigla;
+    for(unsigned int i = 0; i < naves.size();i++){
+        sigla = geraSigla(naves[i].rescursos);
+
+        // Verifica se a chave "sigla" existe no mapa
+        auto it = tabelaGrupos.find(sigla);
+        if (it != tabelaGrupos.end()) {
+            // se existe no mapa
+            adicionaElemento(tabelaGrupos[sigla], naves[i]);
+        }else{
+            // nao existe no map 
+            
+            // criar nova chave, e adiciona a nave
+            tabelaGrupos[sigla].naves[0] = naves[i];
+            tabelaGrupos[sigla].pos++;
+            tabelaGrupos[sigla].prox = nullptr;
+        }
+        
+    }
+    return true;
+}
+
+void printGrupo(Grupo grupo){
+    cout << "Nome das naves: ";
+    for(Nave nave : grupo.naves){
+        cout << nave.nome << " ";
+    }
+    cout << endl;
+    if(grupo.prox != nullptr){
+        cout << "Proximo grupo com a mesma chave" << endl;
+        printGrupo(*grupo.prox);
+    }
+    
+}
+
+void printTabela( map<string, Grupo> tabelaGrupos){
+    
+    for (const auto& par : tabelaGrupos) {
+        cout << "Chave: " << par.first << std::endl;
+        printGrupo(par.second);
+    }
+}
+
+
 
 
 
@@ -231,14 +310,14 @@ int main(void) {
     gd.carregaDados(naves);
 
     map<string, Grupo> tabelaGrupos;
+    geraTabela(naves,tabelaGrupos);
+    printTabela(tabelaGrupos);
+
+
     
 
 
-
-    
-
-
-    cout << geraSigla(naves[2].rescursos);
+    //cout << geraSigla(naves[2].rescursos);
     return 1;
 
 }

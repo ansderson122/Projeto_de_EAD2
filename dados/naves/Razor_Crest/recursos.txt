@@ -1,5 +1,5 @@
-Combustível;3000;sim
+Combustivel;3000;sim
 Agua;200;sim
 Comida;90;sim
-Suprimentos Médicos;10;sim
+Suprimentos Medicos;10;sim
 Droides;1;sim
