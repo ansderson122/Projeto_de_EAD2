@@ -34,9 +34,6 @@ typedef struct nave{
 
     vector<Recurso> rescursos;
     vector<Passageiro> passageiros;
-
-    string siglaRecursos;
-
 }Nave; 
 
 inline string geraSigla(vector<Recurso> rescursos){

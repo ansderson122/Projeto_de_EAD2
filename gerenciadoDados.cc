@@ -48,11 +48,7 @@ bool gerenciadoDados::carregaDados(vector<Nave>& out_dados) {
         this->carregaPassageiros(novaNave.nome,novaNave.passageiros); 
         this->carregaRecursos(novaNave.nome,novaNave.rescursos); 
 
-        string sigla;
-        for(Recurso rucruso : novaNave.rescursos){
-            sigla += rucruso.nomerecurso;
-        }     
-        novaNave.siglaRecursos = sigla;
+       
         
         // Adicione a novaNave ao vetor de dados
         out_dados.push_back(novaNave);

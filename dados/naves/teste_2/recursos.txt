@@ -1,0 +1,3 @@
+Armas;25;nao
+Droides;51;nao
+Suprimentos Medicos;54;sim

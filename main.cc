@@ -73,6 +73,7 @@ Nave cadastraNave(gerenciadoDados gd){
     Nave nave;
     nave.recursosSuporteVidas = "nao";
     nave.numeroPassageiros = 2;
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpa o buffer
 
 
     cout << "adicionar nave" << endl;
@@ -223,9 +224,17 @@ void adicionarClandestinos(vector<Nave> naves, gerenciadoDados gd){
     }
 }
 
+string geraSiglaNave(Nave nave){
+    string sigla;
+    for(Recurso rucruso : nave.rescursos){
+        sigla += rucruso.nomerecurso;
+        }     
+    return sigla;
+}
+
 bool existeSiglaNoGrupo(Grupo grupo, string sigla){
     for(int i = 0; i < grupo.pos; i++){
-        if(grupo.naves[i].siglaRecursos == sigla){
+        if(geraSiglaNave(grupo.naves[i]) == sigla){
             return true;
         }
     }
@@ -236,7 +245,7 @@ bool adicionaNaveGrupo(Grupo& grupo, Nave nave,queue<string>& filaSaida){
     // posição para se colocada a nave
     int pos = grupo.pos;
 
-    if(pos < 6 && !(existeSiglaNoGrupo(grupo,nave.siglaRecursos))){
+    if(pos < 6 && !(existeSiglaNoGrupo(grupo,geraSiglaNave(nave)))){
             grupo.naves[pos] = nave;
             grupo.pos++;
 
@@ -313,6 +322,7 @@ void printGrupo(Grupo grupo){
 void printTabela( map<string, Grupo> tabelaGrupos){
     int j = 1;
     for (const auto& par : tabelaGrupos) {
+        //cout << "Chave do grupo " << par.first << endl;
         cout << "Grupo "<< j << endl;
         printGrupo(par.second);
         cout << endl;

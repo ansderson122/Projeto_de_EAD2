@@ -8,3 +8,6 @@ Slave_II;Caça de Patrulha;Sim;2;1
 Ghost;Corveta VCX-100;Sim;8;2
 Slave_III;Caça de Patrulha;Sim;2;1
 Razor_Crest;Nave de Transporte;Sim;6;2
+teste_1;teste;sim;2;0;0
+teste_2;c;nao;1;0;0
+teste_3;f;sim;1;0;0
