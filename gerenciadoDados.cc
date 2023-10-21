@@ -3,14 +3,23 @@
 #include <windows.h>
 #include <string>
 #include <vector>
+#include <unistd.h>
 using namespace std;
 
 #include "gerenciadoDados.h"
 #include <sstream>
 
 gerenciadoDados::gerenciadoDados(/* args */){
-    this->pathPrincipal = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves.txt";
-    this->pathSegundaria = "C:/Users/ansde/Documents/Projeto_de_EAD2/dados/naves/";
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != nullptr) {
+        std::string currentDirectory(cwd);
+        currentDirectory = currentDirectory.substr(0, currentDirectory.find_last_of("\\/"));
+        this->pathPrincipal = currentDirectory + "/dados/naves.txt";
+        this->pathSegundaria = currentDirectory + "/dados/naves/";
+    } else {
+        std::cerr << "Erro ao obter o diretório atual." << std::endl;
+    }
+   
 }
 
 gerenciadoDados::~gerenciadoDados()
