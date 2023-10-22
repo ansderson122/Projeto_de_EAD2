@@ -14,7 +14,7 @@ typedef struct passageiro{
 typedef struct  recurso {
     string nomerecurso;
     unsigned int quantideda;
-    // 0 para não contem recusor de suporte a vida, e 1 contem 
+
     string suporteVida; 
 
     bool operator<(const recurso& other) const {
